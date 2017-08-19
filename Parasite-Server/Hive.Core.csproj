@@ -25,5 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Hive.Players\Hive.Players.csproj" />
     <ProjectReference Include="..\Hive.Contracts\Hive.Contracts.csproj" />
+    <ProjectReference Include="..\Hive.Socket\Hive.Socket.csproj" />
   </ItemGroup>
 </Project>

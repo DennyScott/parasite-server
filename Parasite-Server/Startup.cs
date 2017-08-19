@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
 using Hive.Players.Autofac;
+using Hive.Socket;
+using Hive.Socket.Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +35,7 @@ namespace Hive.Core
 		public void ConfigureContainer(ContainerBuilder builder)
 		{
 			builder.RegisterModule(new PlayerRegistrationModule());
+            builder.RegisterModule(new SocketRegistrationModule());
 		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,31 +47,6 @@ namespace Hive.Core
             }
 
             app.UseMvc();
-            app.UseWebSockets();
-
-            TcpServer.StartServer(5678);
-            TcpServer.Listen(); //Start Listening
-
-			app.Use(async (context, next) =>
-			{
-				if (context.Request.Path == "/ws")
-				{
-					if (context.WebSockets.IsWebSocketRequest)
-					{
-						WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
-						await Echo(context, webSocket);
-					}
-					else
-					{
-						context.Response.StatusCode = 400;
-					}
-				}
-				else
-				{
-					await next();
-				}
-
-			});
         }
 
 		private async Task Echo(Microsoft.AspNetCore.Http.HttpContext context, WebSocket webSocket)

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Api\" />
+    <Folder Include="Components\" />
+    <Folder Include="Autofac\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hive.Players\Hive.Players.csproj" />
+    <ProjectReference Include="..\Hive.Contracts\Hive.Contracts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.6.1" />
+  </ItemGroup>
+</Project>
