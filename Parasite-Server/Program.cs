@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Parasite_Server
+namespace Hive.Core
 {
     public class Program
     {
@@ -19,6 +20,7 @@ namespace Parasite_Server
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                   .ConfigureServices(services => services.AddAutofac())
                 .UseStartup<Startup>()
                 .Build();
     }

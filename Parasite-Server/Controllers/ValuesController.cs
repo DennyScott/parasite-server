@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Parasite_Server.Controllers
+namespace Hive.Core.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
