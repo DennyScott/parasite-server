@@ -14,7 +14,8 @@ namespace Hive.Players.Autofac
                    .AsImplementedInterfaces();
 
             builder.RegisterType<PlayerList>()
-                   .AsImplementedInterfaces();
+                   .AsImplementedInterfaces()
+                   .SingleInstance();
         }
     }
 }

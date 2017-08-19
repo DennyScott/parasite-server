@@ -57,7 +57,7 @@ namespace Hive.Socket
             }
         }
 
-        private static void OnLineReceived(UserConnection sender, string data)
+        private void OnLineReceived(UserConnection sender, string data)
         {
             Console.WriteLine("Line Recieved");
 
@@ -71,10 +71,16 @@ namespace Hive.Socket
             switch(socketMessage.Command)
             {
                 case "CONNECT":
-                     
+                    _connection.ConnectUser(socketMessage.Player, sender);
+                    break;
+                case "BROADCAST":
+                    _messaging.Broadcast(socketMessage);
+                    break;
+                case "DISCONNECT":
+                    _connection.DisconnectUser(_playerList.GetPlayer(PlayerNamesUtil.StringToEnum(socketMessage.Player)));
                     break;
                 default:
-                    Console.WriteLine("Default");
+                    _messaging.SendToClients(socketMessage);
                     break;
             }
         }

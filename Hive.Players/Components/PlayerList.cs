@@ -11,8 +11,9 @@ namespace Hive.Players.Components
         private const int MaxPlayerSize = 2;
         private readonly IComponentContext _container;
 
-        public PlayerList()
+        public PlayerList(IComponentContext container)
         {
+            _container = container;
             Players = new Dictionary<PlayerNames, IPlayer>();
             _availableNames = new List<PlayerNames>
             {
@@ -56,7 +57,10 @@ namespace Hive.Players.Components
 		private bool TryGetAvailablePlayer(out PlayerNames name)
 		{
 			name = PlayerNames.Unassigned;
+            Console.WriteLine(Players.Count);
 			if (Players.Count >= MaxPlayerSize) return false;
+
+            Console.WriteLine(_availableNames.Count);
 
 			name = _availableNames.PopAt(0);
 			return true;
