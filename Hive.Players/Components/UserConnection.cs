@@ -7,23 +7,21 @@ using Newtonsoft.Json;
 
 namespace Hive.Players.Components
 {
-    public delegate void LineRecieve(UserConnection sender, string Data);
-
     public class UserConnection
     {
         const int READ_BUFFER_SIZE = 1024;
         private TcpClient _client;
         private byte[] readBuffer = new byte[READ_BUFFER_SIZE];
 
-        public UserConnection(TcpClient clientTask)
+        private Action<UserConnection, string> OnLineReceived;
+
+        public UserConnection(TcpClient clientTask, Action<UserConnection, string> onEvent)
         {
             _client = clientTask;
+			OnLineReceived += onEvent;
             _client.GetStream().BeginRead(readBuffer, 0, READ_BUFFER_SIZE, new AsyncCallback(StreamReciever), null);
             Console.WriteLine("User Connected");
         }
-
-        public event LineRecieve LineRecieved;
-
 
         public void SendData(SocketMessage data)
         {
@@ -50,7 +48,7 @@ namespace Hive.Players.Components
 
                 // Convert the byte array the message was saved into, minus Chr(13)
                 message = Encoding.ASCII.GetString(readBuffer, 0, bytesRead - 1);
-                LineRecieved(this, message);
+                OnLineReceived(this, message);
 
                 //Ensure that no other threads try to use this thread at the same time
                 lock(_client.GetStream())

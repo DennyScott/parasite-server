@@ -38,6 +38,13 @@ namespace Hive.Socket
             Console.WriteLine($"Server started. Listeneing to TCP Clients at 127.0.0.1:{port}");
         }
 
+        public void StopServer()
+        {
+            accept = false;
+            Console.WriteLine("Server shutting down");
+            listener.Stop();
+        }
+
         public void Listen()
         {
             if(listener != null && accept)
@@ -50,8 +57,8 @@ namespace Hive.Socket
 
                     if(clientTask.Result != null)
                     {
-                        var client = new UserConnection(clientTask.Result);
-                        client.LineRecieved += OnLineReceived;
+                        Console.WriteLine("Start Connection process");
+                        var client = new UserConnection(clientTask.Result, OnLineReceived);
                     }
                 }
             }
