@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Net;
 using Hive.Players.Components;
@@ -6,6 +7,7 @@ using Newtonsoft.Json;
 using Hive.Contracts;
 using Hive.Socket.Api;
 using Hive.Players.Api;
+using ProtoBuf;
 
 namespace Hive.Socket
 {
@@ -43,6 +45,7 @@ namespace Hive.Socket
             accept = false;
             Console.WriteLine("Server shutting down");
             listener.Stop();
+            _playerList.Dispose();
         }
 
         public void Listen()
@@ -64,27 +67,24 @@ namespace Hive.Socket
             }
         }
 
-        private void OnLineReceived(UserConnection sender, string data)
+        private void OnLineReceived(UserConnection sender, Stream data)
         {
             Console.WriteLine("Line Recieved");
 
-            var dataArray = data.Split((char)13);
-            Console.WriteLine(dataArray[0]);
+            var socketMessage = Serializer.DeserializeWithLengthPrefix<Beat>(data, PrefixStyle.Base128);
 
-            var socketMessage = JsonConvert.DeserializeObject<SocketMessage>(data);
+            Console.WriteLine($"MessageType: {socketMessage.MessageType}");
 
-            Console.WriteLine(socketMessage.Command);
-
-            switch(socketMessage.Command)
+            switch(socketMessage.MessageType)
             {
-                case "CONNECT":
-                    _connection.ConnectUser(socketMessage.Player, sender);
+                case MessageType.Connect:
+                    _connection.ConnectUser("d", sender);
                     break;
-                case "BROADCAST":
-                    _messaging.Broadcast(socketMessage);
+                case MessageType.Broadcast:
+                    //_messaging.Broadcast(socketMessage);
                     break;
-                case "DISCONNECT":
-                    _connection.DisconnectUser(_playerList.GetPlayer(PlayerNamesUtil.StringToEnum(socketMessage.Player)));
+                case MessageType.Disconnect:
+                    _connection.DisconnectUser(_playerList.GetPlayer(PlayerNames.PlayerOne));
                     break;
                 default:
                     _messaging.SendToClients(socketMessage);

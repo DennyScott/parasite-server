@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="protobuf-net" Version="2.3.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hive.Contracts\Hive.Contracts.csproj">
+      <Project>{E2DA5CE3-0431-47FF-8F79-235120B9055E}</Project>
+      <Name>Hive.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

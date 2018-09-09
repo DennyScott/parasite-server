@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using Hive.Contracts;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace Hive.Players.Components
 {
@@ -13,9 +15,9 @@ namespace Hive.Players.Components
         private TcpClient _client;
         private byte[] readBuffer = new byte[READ_BUFFER_SIZE];
 
-        private Action<UserConnection, string> OnLineReceived;
+        private Action<UserConnection, Stream> OnLineReceived;
 
-        public UserConnection(TcpClient clientTask, Action<UserConnection, string> onEvent)
+        public UserConnection(TcpClient clientTask, Action<UserConnection, Stream> onEvent)
         {
             _client = clientTask;
 			OnLineReceived += onEvent;
@@ -23,14 +25,17 @@ namespace Hive.Players.Components
             Console.WriteLine("User Connected");
         }
 
-        public void SendData(SocketMessage data)
+        public void SendData(Beat data)
         {
             lock (_client.GetStream())
             {
-                StreamWriter writer = new StreamWriter(_client.GetStream());
-                writer.Write(JsonConvert.SerializeObject(data));
-                writer.Flush();
+                Serializer.Serialize(_client.GetStream(), data);
             }
+        }
+
+        public void CloseConnection() {
+            _client.Close();
+            _client.Dispose();
         }
 
         public void StreamReciever(IAsyncResult ar)
@@ -45,10 +50,12 @@ namespace Hive.Players.Components
                     // Finish asynch read into readBuffer and get num of bytes read
                     bytesRead = _client.GetStream().EndRead(ar);
                 }
+                
+                Console.WriteLine(bytesRead);
 
+                //var m = Encoding.ASCII.GetString(readBuffer, 0, bytesRead - 1);
                 // Convert the byte array the message was saved into, minus Chr(13)
-                message = Encoding.ASCII.GetString(readBuffer, 0, bytesRead - 1);
-                OnLineReceived(this, message);
+                OnLineReceived(this, _client.GetStream());
 
                 //Ensure that no other threads try to use this thread at the same time
                 lock(_client.GetStream())

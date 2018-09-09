@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/.nuget/packages/sqlitepclraw.lib.e_sqlite3.osx/1.1.3/runtimes/osx-x64/native/libe_sqlite3.dylib">
+      <sourceFolder url="file://$USER_HOME$/.nuget/packages/sqlitepclraw.lib.e_sqlite3.osx/1.1.3/runtimes/osx-x64/native/libe_sqlite3.dylib" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../..">
+      <sourceFolder url="file://$MODULE_DIR$/../../Hive.Contracts" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hive.Players" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Hive.Socket" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../Parasite-Server" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../ProjectDemo" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hive.Contracts/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hive.Contracts/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hive.Players/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hive.Players/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hive.Socket/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Hive.Socket/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Parasite-Server/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../Parasite-Server/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../ProjectDemo/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../ProjectDemo/obj" />
+      <excludeFolder url="file://$MODULE_DIR$/../../packages" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

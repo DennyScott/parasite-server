@@ -1,0 +1,21 @@
+syntax = "proto3";
+package = "Hive.Contracts";
+
+enum Channel {
+    LOBBY = 0;
+    CHAT = 1;
+    INGAME = 2;
+}
+
+enum MessageType {
+    BROADCAST = 0;
+    SEND = 1;
+    CONNECT = 2;
+    DISCONNECT = 3;
+}
+
+message Beat {
+    Channel channel = 0;
+    MessageType messageType = 1;
+    int32 MessageId = 2;
+}

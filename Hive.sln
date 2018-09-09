@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive.Core", "Parasite-Server\Hive.Core.csproj", "{9C9F72E2-407D-4A49-ABDD-74863738ACB0}"
@@ -8,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive.Contracts", "Hive.Contracts\Hive.Contracts.csproj", "{E2DA5CE3-0431-47FF-8F79-235120B9055E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hive.Socket", "Hive.Socket\Hive.Socket.csproj", "{F2B78C22-4945-4A9F-8786-DBA9C6EE09FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectDemo", "ProjectDemo\ProjectDemo.csproj", "{B73C13FB-C038-4A58-8CDF-313A2B5CB29E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,5 +33,9 @@ Global
 		{F2B78C22-4945-4A9F-8786-DBA9C6EE09FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2B78C22-4945-4A9F-8786-DBA9C6EE09FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2B78C22-4945-4A9F-8786-DBA9C6EE09FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B73C13FB-C038-4A58-8CDF-313A2B5CB29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73C13FB-C038-4A58-8CDF-313A2B5CB29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73C13FB-C038-4A58-8CDF-313A2B5CB29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73C13FB-C038-4A58-8CDF-313A2B5CB29E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,5 @@
 ﻿using System;
+using Hive.Contracts;
 using Hive.Players.Api;
 using Hive.Players.Components;
 using Hive.Socket.Api;
@@ -24,14 +25,14 @@ namespace Hive.Socket.Components
 
             if(player == null)
             {
-                _messaging.SendToPlayer("REFUSE", "Connection Failed", new Player() {Client = sender});
+                _messaging.SendToPlayer(Channel.Lobby, "Connection Failed", new Player() {Client = sender});
             }
             else
             {
                 var message = userName + " has joined the game!";
 
                 Console.WriteLine(message);
-                _messaging.SendToPlayer("JOIN", message, player);
+                _messaging.SendToPlayer(Channel.Chat, message, player);
                 _messaging.SendToClients("CHAT", message, player);
             }
         }

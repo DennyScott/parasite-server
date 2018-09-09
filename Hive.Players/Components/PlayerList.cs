@@ -5,7 +5,7 @@ using Hive.Players.Api;
 
 namespace Hive.Players.Components
 {
-    public class PlayerList : IPlayerList
+    public class PlayerList : IPlayerList, IDisposable
     {
         private readonly List<PlayerNames> _availableNames;
         private const int MaxPlayerSize = 2;
@@ -51,8 +51,11 @@ namespace Hive.Players.Components
         public void RemovePlayer(IPlayer player)
         {
             _availableNames.Add(player.Name);
+            player.Client.CloseConnection();
             Players.Remove(player.Name);
         }
+
+
 
 		private bool TryGetAvailablePlayer(out PlayerNames name)
 		{
@@ -65,5 +68,13 @@ namespace Hive.Players.Components
 			name = _availableNames.PopAt(0);
 			return true;
 		}
+
+        public void Dispose()
+        {
+            foreach(var player in Players) 
+            {
+                player.Value.Client.CloseConnection();
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using Hive.Players.Components;
 
 namespace Hive.Players.Api
 {
-    public interface IPlayerList
+    public interface IPlayerList : IDisposable
     {
         Dictionary<PlayerNames, IPlayer> Players { get; }
         IPlayer AddPlayer(UserConnection client);
